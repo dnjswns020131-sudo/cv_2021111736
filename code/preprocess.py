@@ -3,15 +3,12 @@ import shutil
 from pathlib import Path
 from PIL import Image
 
-# 난수 고정
 random.seed(42)
 
-# 데이터 경로 설정
 base_dir = Path(__file__).resolve().parent.parent
 data_dir = base_dir / "data"
 source_dir = data_dir / "PetImages"
 
-# 강아지, 고양이 데이터 분류
 for animal in ["Cat", "Dog"]:
 
     images = sorted((source_dir / animal).glob("*.jpg"))
@@ -19,7 +16,6 @@ for animal in ["Cat", "Dog"]:
 
     valid_images = []
 
-    # 정상적인 이미지 500장 추출
     for image_path in images:
         try:
             with Image.open(image_path) as img:
@@ -43,7 +39,6 @@ for animal in ["Cat", "Dog"]:
         "test": valid_images[400:500]
     }
 
-    # 각 폴더에 이미지 복사
     for split, files in datasets.items():
 
         target_dir = data_dir / split / animal.lower()
